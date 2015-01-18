@@ -8,10 +8,18 @@ body > nav {
   padding-bottom: .35em;
   
   ul { display: none; }
+
+  .main-navigation {
+    li {
+      float: left;
+      list-style: none;
+    }
+  }
+
   @media only screen and (min-width: 550px) {
     font-size: .9em;
     ul {
-      @include horizontal-list(0);
+      
       float: left;
       display: block;
       padding-top: .15em;
@@ -25,7 +33,6 @@ body > nav {
       margin: 0;
     }
     a {
-      @include link-colors($nav-color, $nav-color-hover, $visited: $nav-color);
       //@extend .sans;
       text-shadow: lighten($nav-bg, 12) 0 1px;
       float: left;

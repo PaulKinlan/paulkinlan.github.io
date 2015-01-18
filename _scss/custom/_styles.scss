@@ -4,3 +4,8 @@
 #main {
   overflow: auto;
 }
+
+
+a:visited {
+  color: $link-color-visited;
+}

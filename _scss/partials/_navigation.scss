@@ -16,6 +16,12 @@ body > nav {
     }
   }
 
+  @media only screen and (max-width: 768px){
+    .main-navigation {
+      display: none;
+    }
+  }
+
   @media only screen and (min-width: 550px) {
     font-size: .9em;
     ul {

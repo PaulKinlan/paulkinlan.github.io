@@ -35,7 +35,7 @@ category_dir: categories
 markdown: kramdown
 highlighter: false # default python pygments have been replaced by pygments.rb
 sass:
-  sass_dir: _sass
+  sass_dir: _scss
   style: :compressed
 
 

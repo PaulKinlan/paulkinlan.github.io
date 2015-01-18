@@ -84,7 +84,7 @@ h1 {
   h1 { font-size: 2.6em; line-height: 1.2em; }
 }
 
-#{headings()}{
+h1, h2, h3, h4, h5, h6{
   @extend .heading;
   text-rendering: optimizelegibility;
   margin-bottom: 1em;

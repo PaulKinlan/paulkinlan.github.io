@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head lang="en">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>I did it.... Fish Eye... Call Me Kinlan The Chuffed!!! - Tales of a Developer Advocate</title>
+  <meta name="author" content="Paul Kinlan">
+  <meta name="theme-color" content="ffffff">
+
+  
+  <meta name="description" content="It wasn't too hard.... I did take a peak at the code behind the fish eye that Jason Waltman describes. I did this purely because the code I &hellip;">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://paul.kinlan.me/i-did-it-fish-eye-call-me-kinlan-the-chuffed-/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Tales of a Developer Advocate" type="application/atom+xml">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-114468-20']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <!-- Built with love using Web Starter Kit -->
+
+
+</head>
+
+<body  >
+  
+  <header role="banner"><hgroup>
+  <h1><a href="/i-did-it-fish-eye-call-me-kinlan-the-chuffed-//">I did it.... Fish Eye... Call Me Kinlan The Chuffed!!!</a></h1>
+  
+   <p class="meta">
+     
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-05-17T00:00:00+01:00" pubdate data-updated="true"></time>
+   </p>
+  
+  <div class="author card">
+<a href="https://plus.google.com/+PaulKinlan?rel=author" target="_blank"><img src="/images/me.jpg"></a>
+   <div class="name"><a href="mailto:paul.kinlan@gmail.com" target="_blank">Paul Kinlan</a></div>
+</div>
+</hgroup></header>
+  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul></nav>
+
+  <div id="main">
+    <div id="content">
+      <article class="hentry" role="article">
+  
+<div class="entry-content">It wasn't too hard.... I did take a peak at the code behind the <a href="http://www.jasonwaltman.com/thesis/filter-fisheye.html/tag" rel="tag" target="_blank">fish eye</a> that <a href="http://www.jasonwaltman.com/" target="_blank"><strong><span style="COLOR: #4386ce;">Jason Waltman</span></strong></a> describes. I did this purely because the code I implemented seemed to match the pseduo code that was written but my results were not quite correct. I looked at the code, converted it to c# implemented it as a filter in the Tiger Image Processing Library (Tiger Imaging) for C# <a href="http://www.thecodeproject.com/cs/media/Image_Processing_Lab.asp" target="_blank"><strong><span style="COLOR: #4386ce;">here</span></strong></a> and it worked pretty much the first time it was tan.<p />I understand a bit more about polar co-ordinates now as well :)<p />Basically we have are our normal Cartesian Co-ordinates (x,y) which are used on our screens as pixel locations ((0,0) is the top left, (10,10) is 10 pixels in from the top left etc). Polar co-ordinates are co-ordinates that are specified in Angles and units from the center of a Circle .... I think!<p />So a Polar Co-ordinate (angle = 45, radius = 20) would mean that the point we want is 45 degrees from North and 20 units out from the centre.<p />This is useful in the Fish Eye Effect which needs to work out what pixels will be in the fish eye region.<p />The Fish eye effect has two basic stages<br /><ul>
+<li>Work out which pixel should be fish eyed</li>
+<li>If a pixel needs to be fish eyed, work out where the pixel should be placed based on where it is in the fish eye's view.</li>
+</ul>Hmm.... Don't know if I made too much sense there, but I will comment the code a bit more and then post it as a link.<br /><div class="blogger-post-footer"><img class="posterous_download_image" src="https://blogger.googleusercontent.com/tracker/8109338-111636219965388227?l=www.kinlan.co.uk%2Findex.html" height="1" alt="" width="1" /></div>
+</div>
+
+
+  <footer>
+    <div class="wrapper">
+      <div class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Paul Kinlan</span></span>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-05-17T00:00:00+01:00" pubdate data-updated="true"></time>
+        
+
+
+      </div>
+      <div class="meta">
+        
+          <a class="basic-alignment left" href="/running-gacutil-in-build-for-visual-studio-20/" title="Previous Post: Running GACUtil in Build for Visual Studio 2005">&laquo; Running GACUtil in Build for Visual Studio 2005</a>
+        
+        
+          <a class="basic-alignment right" href="/looks-like-i-can-t-update-the-old-account-any/" title="Next Post: Looks like I can't update the old account anymore, so looks like I am staying here">Looks like I can't update the old account anymore, so looks like I am staying here &raquo;</a>
+        
+      </div>
+    </div>
+  </footer>
+</article>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Paul Kinlan
+</p>
+
+</footer>
+  
+
+
+
+</body>
+</html>

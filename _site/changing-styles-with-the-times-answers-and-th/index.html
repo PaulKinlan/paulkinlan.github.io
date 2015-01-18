@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head lang="en">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Changing Styles with the times (Answers and Thoughts) - Tales of a Developer Advocate</title>
+  <meta name="author" content="Paul Kinlan">
+  <meta name="theme-color" content="ffffff">
+
+  
+  <meta name="description" content="I had a really good set of conversations about the issue of loading styles and new UI designs into an Avalon app. Thanks go out to Micheal Latta and &hellip;">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://paul.kinlan.me/changing-styles-with-the-times-answers-and-th/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Tales of a Developer Advocate" type="application/atom+xml">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-114468-20']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <!-- Built with love using Web Starter Kit -->
+
+
+</head>
+
+<body  >
+  
+  <header role="banner"><hgroup>
+  <h1><a href="/changing-styles-with-the-times-answers-and-th//">Changing Styles with the times (Answers and Thoughts)</a></h1>
+  
+   <p class="meta">
+     
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-06-25T00:00:00+01:00" pubdate data-updated="true"></time>
+   </p>
+  
+  <div class="author card">
+<a href="https://plus.google.com/+PaulKinlan?rel=author" target="_blank"><img src="/images/me.jpg"></a>
+   <div class="name"><a href="mailto:paul.kinlan@gmail.com" target="_blank">Paul Kinlan</a></div>
+</div>
+</hgroup></header>
+  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul></nav>
+
+  <div id="main">
+    <div id="content">
+      <article class="hentry" role="article">
+  
+<div class="entry-content">I had a really good set of conversations about the issue of loading styles and new UI designs into an Avalon app. Thanks go out to Micheal Latta and Jason [MobiForm]<p />Here's some of the conversation and some comments I have around them.<p /><blockquote class="posterous_medium_quote"><p>It is certanly possible to load different UI controls into a window at run-time. AVPad does this now to a degree. The real issue is going to be hooking the UI up to the code behind class(es). Loading XAML at runtime will not benifit from the event delegate generation and element naming that exist in the compiled code/BAML combination. If the XAML loader parses all properties and retains those as properties at run-time you could do a pass on the parse tree to hook these things up at run-time. I expect to see many applications offering this type of pluggable UI model as Avalon sinks into the developer community. --Michael</p></blockquote><p>Essentially what is being implied here is that you can load up XAML at runtime but you will have to re-hook up the properties and the events at run-time because the loader. However, I have been thinking that getting the people who change the UI to create BAML is not all of a problem really. Therefore the app will be able to load a new compiled XAML file and use the same UI class on the backend.</p><p>An example might be we design two layouts each different from each other however they both share the same code-behind class:</p><p>&lt;window class="AvalonApplication1.Window1" xmlns="http://schemas.microsoft.com/winfx/avalon/2005" x="http://schemas.microsoft.com/winfx/xaml/2005" text="AvalonApplication1"&gt;<p />&lt;window class="AvalonApplication1.Window1" xmlns="http://schemas.microsoft.com/winfx/avalon/2005" x="http://schemas.microsoft.com/winfx/xaml/2005" text="AvalonApplication2"&gt; </p><p>This might work, I haven't tried it yet. </p><p>I am looking into loading a <a href="http://www.kinlan.co.uk/2005/06/changing-styles-with-times.html" rel="tag">XAML</a> file that simply contains resources at runtime and then assigning them also at runtime. I will let you know of the results.</p><div class="blogger-post-footer"><img class="posterous_download_image" src="https://blogger.googleusercontent.com/tracker/8109338-111972557582688527?l=www.kinlan.co.uk%2Findex.html" height="1" alt="" width="1" /></div>
+</div>
+
+
+  <footer>
+    <div class="wrapper">
+      <div class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Paul Kinlan</span></span>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-06-25T00:00:00+01:00" pubdate data-updated="true"></time>
+        
+
+
+      </div>
+      <div class="meta">
+        
+          <a class="basic-alignment left" href="/doubleanimation-crashes-xamlpad-mayctp-some-a/" title="Previous Post: DoubleAnimation Crashes XAMLPad (MayCTP): Some Answers To Questions">&laquo; DoubleAnimation Crashes XAMLPad (MayCTP): Some Answers To Questions</a>
+        
+        
+          <a class="basic-alignment right" href="/looks-like-you-can-do-it-yipee-/" title="Next Post: Looks like you can do it! Yipee!">Looks like you can do it! Yipee! &raquo;</a>
+        
+      </div>
+    </div>
+  </footer>
+</article>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Paul Kinlan
+</p>
+
+</footer>
+  
+
+
+
+</body>
+</html>

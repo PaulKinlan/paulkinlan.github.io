@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head lang="en">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DoubleAnimation Crashes XAMLPad (MayCTP): Some Answers To Questions - Tales of a Developer Advocate</title>
+  <meta name="author" content="Paul Kinlan">
+  <meta name="theme-color" content="ffffff">
+
+  
+  <meta name="description" content="I posted around some news groups to find an answer about my crash and a I recieved the following reply from Mike Hillbert.When you're animating Width &hellip;">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://paul.kinlan.me/doubleanimation-crashes-xamlpad-mayctp-some-a/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/css/screen.css" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Tales of a Developer Advocate" type="application/atom+xml">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-114468-20']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <!-- Built with love using Web Starter Kit -->
+
+
+</head>
+
+<body  >
+  
+  <header role="banner"><hgroup>
+  <h1><a href="/doubleanimation-crashes-xamlpad-mayctp-some-a//">DoubleAnimation Crashes XAMLPad (MayCTP): Some Answers To Questions</a></h1>
+  
+   <p class="meta">
+     
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-06-10T00:00:00+01:00" pubdate data-updated="true"></time>
+   </p>
+  
+  <div class="author card">
+<a href="https://plus.google.com/+PaulKinlan?rel=author" target="_blank"><img src="/images/me.jpg"></a>
+   <div class="name"><a href="mailto:paul.kinlan@gmail.com" target="_blank">Paul Kinlan</a></div>
+</div>
+</hgroup></header>
+  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul></nav>
+
+  <div id="main">
+    <div id="content">
+      <article class="hentry" role="article">
+  
+<div class="entry-content">I posted around some news groups to find an answer about my crash and a I recieved the following reply from Mike Hillbert.<p /><blockquote>When you're animating Width or Height, you have to specify both the From and the To, or you have to have specified the base value somewhere (e.g. on the element itself).<p />That's because when you don't specify the From or To it gets inferred from the base (unanimated) value.  And in the case of Width and Height, the base value often isn't known until later when layout runs.<p />For example, in this page<p />&lt;Page ...&gt;<br />    ...<br />    &lt;Page.Storyboards&gt;<br />       &lt;SetterTimeline TargetName="btn" Path="(Button.Width)" &gt;<br />            &lt;DoubleAnimation From="50"  /&gt;<br />       &lt;/SetterTimeline&gt;<br />    &lt;/Page.Storyboards&gt;<br />    ...<br />    &lt;Button Width="100" Name="btn" Background="Blue"&gt;Click&lt;/Button&gt;<br />    ...<br />&lt;/Page&gt;<p />the button's width is explicitly set on the &lt;Button&gt;, so the animation implicitly takes the width to 100 (from 50).  But if you don't have the Width set in the &lt;Button&gt;, and don't have it anywhere else (e.g. in a Style), you have to have the From on the DoubleAnimation.</blockquote><p />I think it basically sums up the problem quite simply.  I wasn't giving the actual MenuItem a width, the "Owner Draw" elements in the Visual Tree had a width but the actual menu item didn't.  Funnily enough (Well it is not that funny), I tried the suggested fixes and the crash was still occuring.  I also tried the following bit of XAML which is supposed to give every control that meets the style criteria a width of 200:<p /><blockquote class="posterous_short_quote">&lt;Style TargetType="{x:Type MenuItem}" x:Key="{x:Type MenuItem}" &gt;<br /> &lt;Setter Property="Width" Value="200" /&gt;<br /> ...<br /> ...</blockquote><p />I think my next course of action is to try and get this in a proper WinFX application rather than just XAMLPad.<div class="blogger-post-footer"><img class="posterous_download_image" src="https://blogger.googleusercontent.com/tracker/8109338-111843375042179676?l=www.kinlan.co.uk%2Findex.html" height="1" alt="" width="1" /></div>
+</div>
+
+
+  <footer>
+    <div class="wrapper">
+      <div class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Paul Kinlan</span></span>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-06-10T00:00:00+01:00" pubdate data-updated="true"></time>
+        
+
+
+      </div>
+      <div class="meta">
+        
+          <a class="basic-alignment left" href="/changing-styles-with-the-times/" title="Previous Post: Changing Styles with the times">&laquo; Changing Styles with the times</a>
+        
+        
+          <a class="basic-alignment right" href="/changing-styles-with-the-times-answers-and-th/" title="Next Post: Changing Styles with the times (Answers and Thoughts)">Changing Styles with the times (Answers and Thoughts) &raquo;</a>
+        
+      </div>
+    </div>
+  </footer>
+</article>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Paul Kinlan
+</p>
+
+</footer>
+  
+
+
+
+</body>
+</html>

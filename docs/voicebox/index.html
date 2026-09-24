@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voicebox — The Voice-First Coding Environment</title>
+  <meta name="description" content="Talk with an AI coding model that reads, reasons about, and modifies files in real time as you speak, with immediate UI file reflection.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="canonical" href="https://paulkinlan.github.io/voicebox/">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/css/projects.css">
+  <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <a class="identity" href="/">Paul Kinlan</a>
+    <nav aria-label="Elsewhere">
+      <a href="/">All Projects</a>
+      <a href="/agents/">The Software Factory</a>
+      <a href="/cap/">Chrome Agent Platform</a>
+      <a href="https://github.com/PaulKinlan/voicebox">GitHub Repo</a>
+    </nav>
+  </header>
+
+  <main id="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Projects</a> &rsaquo; <span>Voicebox</span>
+    </nav>
+
+    <section class="product-hero">
+      <div class="product-badge-group">
+        <span class="badge">Duplex Voice AI</span>
+        <span class="badge badge--blue">Immediate Tool Reflection</span>
+        <span class="badge badge--purple">ACP Harness Bridge</span>
+        <span class="badge">OPFS & Directory Handles</span>
+        <span class="badge">Sandboxed Execution</span>
+      </div>
+      <h1 class="product-title">Voice<span>box</span></h1>
+      <p class="product-tagline">
+        The voice-first coding environment. Speak naturally with an AI coding model that reads your project, reasons aloud, and modifies code files in real time—with all edits appearing instantly in your browser as they arrive.
+      </p>
+      <div class="cta-group">
+        <a href="#quickstart" class="btn btn-primary">Run Voicebox</a>
+        <a href="https://github.com/PaulKinlan/voicebox" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="#docs" class="btn btn-secondary">Architecture Docs</a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Talk and Code Without Context Switching</h2>
+      <p class="section-intro">
+        Voicebox bridges low-latency duplex voice audio with real local coding harnesses and native file system storage.
+      </p>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <h3>🎙️ Real-Time Duplex Audio</h3>
+          <p>
+            Stream raw PCM audio from your microphone to multimodal speech models (Gemini Live / OpenAI Realtime) with natural interruption and smooth model audio playback.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>⚡ Immediate Tool Reflection</h3>
+          <p>
+            When the model calls file tools (write, edit, patch), modified files render instantly in the browser's file explorer. No reloads or manual refreshing required.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>🔌 ACP Coding Harness Bridge</h3>
+          <p>
+            Speaks the Agent Client Protocol (ACP) over stdio to communicate directly with local coding agents (<code>pi</code>, <code>claude</code>) running on your machine.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>📁 Dual File System Architecture</h3>
+          <p>
+            Work in standalone browser-owned <strong>OPFS</strong> (Origin Private File System) without granting host permissions, or open real local machine directories with IndexedDB reload persistence.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>🛡️ Hermetic Sandbox Fencing</h3>
+          <p>
+            Fenced execution runs inside Bubblewrap containers and transient <code>systemd</code> units with strict CPU, memory, and timeout bounds (<code>RuntimeMaxSec=1800</code>).
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>🔍 Live Debug Timeline</h3>
+          <p>
+            Opt-in <code>?debug=1</code> panel surfaces real-time audio state machines, ACP JSON-RPC traces, tool invocations, and redacted exportable session logs.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="docs" class="content-section">
+      <h2>Architectural Documentation Library</h2>
+      <p class="section-intro">
+        Voicebox is built on rigorous architectural specifications. Read the underlying documentation in the repository:
+      </p>
+
+      <div class="docs-grid">
+        <a href="https://github.com/PaulKinlan/voicebox/blob/main/docs/07-architecture.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>07 · System Architecture</h4>
+          <p>Core room topology, WebSocket duplex protocol, live session lifecycle, and responsive file explorer container queries.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/voicebox/blob/main/docs/08-how-it-runs.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>08 · How It Runs</h4>
+          <p>Development server startup, Vite proxy chaining, secure origin enforcement (port 5173), and health checks.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/voicebox/blob/main/docs/09-proxied-custody.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>09 · Proxied Custody & Authority</h4>
+          <p>Security boundaries between untrusted voice input, host-token authentication, and execution permissions.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/voicebox/blob/main/docs/11-acp-adapter.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>11 · ACP Harness Adapter</h4>
+          <p>Agent Client Protocol stdio client, session handshake, cancellation semantics, and tool call mapping.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/voicebox/blob/main/docs/15-sandbox.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>15 · Sandbox & Fence Lifecycle</h4>
+          <p>Bubblewrap isolation, proposals folder protocol, transient unit lifetimes, and automatic orphan cleanup.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/voicebox/blob/main/docs/06-environments.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>06 · Environments Model</h4>
+          <p>Pluggable environments, capability declarations, and zero-server browser-owned task delegation.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="quickstart" class="content-section">
+      <h2>Quickstart & Local Setup</h2>
+      <p class="section-intro">
+        Run Voicebox locally under Node 22+ with audio access enabled.
+      </p>
+
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-body">
+            <h3>Clone and install dependencies</h3>
+            <p>Voicebox requires a modern Node.js runtime and npm:</p>
+            <pre><code>git clone https://github.com/PaulKinlan/voicebox.git
+cd voicebox
+npm install</code></pre>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-body">
+            <h3>Verify system environment</h3>
+            <p>Run the built-in doctor command to check API keys and dependencies:</p>
+            <pre><code>npm run doctor</code></pre>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-body">
+            <h3>Start the development server</h3>
+            <p>Starts the Vite frontend on <code>http://127.0.0.1:5173/</code> and the backend API on <code>http://127.0.0.1:8787/</code>:</p>
+            <pre><code>npm run dev</code></pre>
+            <p>Open <code>http://127.0.0.1:5173/</code> in Chrome. A secure localhost origin is required to grant microphone access.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Paul Kinlan &middot; <a href="/">All Projects</a> &middot; <a href="https://github.com/PaulKinlan/voicebox">GitHub Repository</a></p>
+  </footer>
+</body>
+</html>

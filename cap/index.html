@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chrome Agent Platform (CAP) — In-Browser Autonomous Agents</title>
+  <meta name="description" content="A privacy-first, local-first in-browser agent harness for Google Chrome, integrating coding agents, browser automation, and MCP tools directly into your daily workflow.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="canonical" href="https://paulkinlan.github.io/cap/">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/css/projects.css">
+  <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <a class="identity" href="/">Paul Kinlan</a>
+    <nav aria-label="Elsewhere">
+      <a href="/">All Projects</a>
+      <a href="/agents/">The Software Factory</a>
+      <a href="/voicebox/">Voicebox</a>
+      <a href="https://github.com/PaulKinlan/chrome-agent-platform">GitHub Repo</a>
+    </nav>
+  </header>
+
+  <main id="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Projects</a> &rsaquo; <span>Chrome Agent Platform</span>
+    </nav>
+
+    <section class="product-hero">
+      <div class="product-badge-group">
+        <span class="badge">Chrome Extension</span>
+        <span class="badge badge--blue">Manifest V3</span>
+        <span class="badge badge--purple">ACP & MCP Bridge</span>
+        <span class="badge">Script Sandbox CSP</span>
+        <span class="badge">Local-First</span>
+      </div>
+      <h1 class="product-title">Chrome Agent <span>Platform</span></h1>
+      <p class="product-tagline">
+        The in-browser agent harness for Google Chrome. Seamlessly embeds autonomous coding agents, browser automation tools, and MCP servers directly into Chrome's New Tab Page (NTP) and Side Panel with strict security containment.
+      </p>
+      <div class="cta-group">
+        <a href="#quickstart" class="btn btn-primary">Install Extension</a>
+        <a href="https://github.com/PaulKinlan/chrome-agent-platform" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="#docs" class="btn btn-secondary">Architecture Docs</a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Agents Directly Inside Your Browser Surfaces</h2>
+      <p class="section-intro">
+        CAP bridges local AI coding CLIs and MCP servers with Chrome's native extension APIs, delivering a fast, keyboard-driven agent hub right alongside your browsing tabs.
+      </p>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <h3>🚀 New Tab Page & Side Panel</h3>
+          <p>
+            Invoke agents from Chrome's New Tab Page or keep a persistent assistant open in the Side Panel with responsive collapsible rails and 34px icon navigation.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>🛡️ Hardened Script Sandbox</h3>
+          <p>
+            Untrusted code runs inside an isolated iframe sandbox governed by a strict Content Security Policy (<code>connect-src 'none'</code>). Network egress is confined strictly to the host bridge.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>⚡ Zero-WASM Tree-Shaking</h3>
+          <p>
+            Extension page bundles are statically enforced to ship zero WebAssembly runtime overhead or unneeded dependencies, keeping extension memory footprint minimal.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>🔌 ACP & MCP Tool Protocol</h3>
+          <p>
+            Connects seamlessly to local developer tools, Model Context Protocol (MCP) servers, and Agent Client Protocol (ACP) harnesses like Pi and Claude Code.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>🎭 Configured Agent Templates</h3>
+          <p>
+            Pre-seed agents with dedicated prompt instructions, tool permissions, and skill sets. Missing skills and requirements are explicitly surfaced before run execution.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>🧪 370+ Verified Journey Gates</h3>
+          <p>
+            Every release is guarded by real headless browser tests verifying end-to-end task completion, accessibility, cookie redaction, and multi-surface parity.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="docs" class="content-section">
+      <h2>Architectural Documentation Library</h2>
+      <p class="section-intro">
+        Explore the technical decisions and engineering contracts behind the platform:
+      </p>
+
+      <div class="docs-grid">
+        <a href="https://github.com/PaulKinlan/chrome-agent-platform/blob/main/docs/CHROME-TEST-CONTRACT.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>Chrome Test Contract</h4>
+          <p>The rules governing hermetic browser testing, CDP evaluate timeouts, and test-stage concurrency isolation.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/chrome-agent-platform/blob/main/docs/OPEN-QUESTIONS.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>Architecture & Open Questions</h4>
+          <p>System trade-offs covering tabular artifact promotion, worker conversation histories, and provider price models.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/chrome-agent-platform/blob/main/AGENTS.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>Agent Operating System</h4>
+          <p>Autonomous fleet guidelines, Beads task tracking conventions, and model review routing rules.</p>
+        </a>
+
+        <a href="https://github.com/PaulKinlan/chrome-agent-platform/blob/main/CHANGELOG.md" class="doc-card" target="_blank" rel="noopener">
+          <h4>Release Changelog</h4>
+          <p>Full version history from v0.1 to v0.3.475, detailing bug fixes, UI enhancements, and security updates.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="quickstart" class="content-section">
+      <h2>Installation & Setup</h2>
+      <p class="section-intro">
+        Build and load the extension in Chrome Developer Mode.
+      </p>
+
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-body">
+            <h3>Clone and install dependencies</h3>
+            <pre><code>git clone https://github.com/PaulKinlan/chrome-agent-platform.git
+cd chrome-agent-platform
+npm install</code></pre>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-body">
+            <h3>Build the extension bundle</h3>
+            <pre><code>npm run build</code></pre>
+            <p>This compiles the production extension bundles into the <code>extension/dist/</code> directory.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-body">
+            <h3>Load in Chrome</h3>
+            <ol style="padding-inline-start: 1.25rem; color: var(--muted); margin-block-end: 1rem; line-height: 1.6;">
+              <li>Navigate to <code>chrome://extensions</code> in Google Chrome.</li>
+              <li>Toggle <strong>Developer mode</strong> in the top-right corner.</li>
+              <li>Click <strong>Load unpacked</strong> and select the <code>extension/</code> folder.</li>
+              <li>Open a New Tab to launch the agent hub!</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Paul Kinlan &middot; <a href="/">All Projects</a> &middot; <a href="https://github.com/PaulKinlan/chrome-agent-platform">GitHub Repository</a></p>
+  </footer>
+</body>
+</html>

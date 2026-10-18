@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coding Agent System Prompts: A Comparative Deep Dive & Architectural Audit</title>
+  <meta name="description" content="In-depth comparative study of default system prompts across Claude Code, DeepSeek Coder, OpenAI Codex, OpenCode, T3 Code, and the Fleet multi-agent harness.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="canonical" href="https://paulkinlan.github.io/fleet-prompt-engineering/">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/css/projects.css">
+  <link rel="stylesheet" href="/css/product.css">
+  <style>
+    .prompt-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+    .prompt-table th, .prompt-table td { padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.12); text-align: left; }
+    .prompt-table th { background: rgba(255,255,255,0.05); color: #fff; font-weight: 600; }
+    .prompt-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    .badge--green { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
+    .badge--amber { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge--red { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .code-callout { background: #0f172a; border-left: 4px solid #38bdf8; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.9rem; line-height: 1.5; color: #e2e8f0; overflow-x: auto; }
+    .metric-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .metric-val { font-size: 1.8rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.25rem; }
+    .metric-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <a class="identity" href="/">Paul Kinlan</a>
+    <nav aria-label="Elsewhere">
+      <a href="/">All Projects</a>
+      <a href="/agents/">Software Factory</a>
+      <a href="/voicebox/">Voicebox</a>
+      <a href="/cap/">Chrome Agent Platform</a>
+      <a href="https://github.com/PaulKinlan/fleet">Fleet GitHub</a>
+    </nav>
+  </header>
+
+  <main id="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Projects</a> &rsaquo; <span>Fleet Prompt Engineering Analysis</span>
+    </nav>
+
+    <section class="product-hero">
+      <div class="product-badge-group">
+        <span class="badge badge--purple">Prompt Engineering</span>
+        <span class="badge badge--blue">Systems Architecture</span>
+        <span class="badge badge--green">Multi-Engine Benchmarking</span>
+      </div>
+      <h1 class="product-title">Coding Agent System Prompts:<br><span>A Comparative Deep Dive</span></h1>
+      <p class="product-tagline">
+        Evaluating prompt design, instruction density, and context overhead across <strong>Claude Code</strong>, <strong>DeepSeek Coder</strong>, <strong>OpenAI Codex</strong>, <strong>OpenCode</strong>, <strong>T3 Code</strong>, and the <strong>Fleet Multi-Agent Harness</strong>.
+      </p>
+      <div class="cta-group">
+        <a href="#comparison" class="btn btn-primary">Comparative Matrix</a>
+        <a href="#recommendations" class="btn btn-secondary">Architectural Fixes</a>
+        <a href="#raw-prompts" class="btn btn-secondary">Extracted Prompts</a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Executive Summary</h2>
+      <p class="section-intro">
+        As language models scale in raw coding capability, the system prompt is no longer just a set of instructions; it is the <strong>operating system ABI (Application Binary Interface)</strong> that governs how models manipulate the host filesystem, handle fatal errors, manage context windows, and interact with other autonomous processes.
+      </p>
+      <p>
+        In this audit, we examine the production system prompts and control architectures of five premier coding agent implementations, benchmark them against the Exe.dev Fleet prompt architecture (<code>roles/common.md</code>, <code>roles/coord.md</code>, and role specifications), and identify four concrete improvements that reduce token bloat while boosting reasoning accuracy.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0;">
+        <div class="metric-card">
+          <div class="metric-val">15.5 KB</div>
+          <div class="metric-label">Fleet Common Prompt Size (~3.8k tokens)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">4.2 KB</div>
+          <div class="metric-label">Claude Code Base Prompt (~1.1k tokens)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">1.8 KB</div>
+          <div class="metric-label">OpenAI Codex Base (~450 tokens)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">40%</div>
+          <div class="metric-label">Target Prompt Token Reduction</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparison" class="content-section">
+      <h2>Comparative Architecture Matrix</h2>
+      <table class="prompt-table">
+        <thead>
+          <tr>
+            <th>Agent Runtime</th>
+            <th>Prompt Paradigm</th>
+            <th>Primary Strengths</th>
+            <th>Key Vulnerabilities / Gaps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Claude Code</strong><br><em>Anthropic</em></td>
+            <td><span class="badge badge--blue">Dynamic Modular Fragments</span></td>
+            <td>Clickable <code>file:line</code> hyperlinks; turn-by-turn <code>&lt;system-reminder&gt;</code> injection; strong distinction between exploration and destructive execution.</td>
+            <td>Tightly bound to single interactive sessions; lacks distributed multi-agent ledger synchronization.</td>
+          </tr>
+          <tr>
+            <td><strong>DeepSeek Coder</strong><br><em>DeepSeek</em></td>
+            <td><span class="badge badge--green">Code-Dense Minimalist</span></td>
+            <td>87% code-trained corpus bias; native Fill-In-The-Middle (FIM) syntax; high instruction adherence with minimal negative constraints.</td>
+            <td>Degrades rapidly when overloaded with multi-page conversational rules and negative warnings ("do not do X").</td>
+          </tr>
+          <tr>
+            <td><strong>OpenAI Codex CLI</strong><br><em>OpenAI</em></td>
+            <td><span class="badge badge--purple">Structured ACI Contract</span></td>
+            <td>Compact (450 tokens); explicit <code>AGENTS.md</code> scoping hierarchy; clear separation of streaming thoughts vs tool patches.</td>
+            <td>Requires strict external sandbox execution; assumes direct human in the loop for ambiguous commands.</td>
+          </tr>
+          <tr>
+            <td><strong>OpenCode / Interpreter</strong><br><em>Open Source</em></td>
+            <td><span class="badge">Execution Feedback Loop</span></td>
+            <td>Client-server separation; execution error back-propagation; dynamic on-demand Skill loading into sub-agent contexts.</td>
+            <td>Prone to deep context pollution without strict memory compaction; higher multi-turn token costs.</td>
+          </tr>
+          <tr>
+            <td><strong>T3 Code</strong><br><em>pingdotgg / Theo</em></td>
+            <td><span class="badge">Control Plane & Guardrails</span></td>
+            <td>Git worktree isolation per task; strict process safety ("3 ways to hurt yourself" rules prevent wild <code>pkill</code>/<code>kill</code> cascades); desktop diff UI.</td>
+            <td>Orchestrator rather than an autonomous prompt harness; delegates prompt construction to underlying agents.</td>
+          </tr>
+          <tr>
+            <td><strong>Exe.dev Fleet</strong><br><em>Paul Kinlan / Fleet</em></td>
+            <td><span class="badge badge--amber">Distributed Ledger & Roles</span></td>
+            <td>"Beads is the ledger; a message is a photograph"; independent cross-family model review; preemption-aware heavy gate vs fast gate.</td>
+            <td>Prompt size inflation (<code>roles/common.md</code> is near the 16KB limit); repetition of deterministic rules handled by daemons.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="raw-prompts" class="content-section">
+      <h2>Anatomy of the Prompts</h2>
+
+      <h3>1. Claude Code: The Dynamic Harness Mindset</h3>
+      <p>
+        Claude Code treats the model not as a generic conversationalist, but as an interactive CLI tool operating with user-selected permissions. Key prompt excerpts demonstrate how it enforces safety and clickability:
+      </p>
+      <div class="code-callout">
+You are Claude Code, Anthropic's official CLI for Claude. You are an interactive agent that helps users with software engineering tasks.
+
+Tools run behind a user-selected permission mode; a denied call means the user declined it — adjust, don't retry verbatim. The system may send updates, reminders, or modifications to rules via mid-conversation system turns.
+
+Prefer the dedicated file/search tools over shell commands when one fits. Independent tool calls can run in parallel in one response. Reference code as file_path:line_number — it's clickable.
+
+Write code that reads like the surrounding code: match its comment density, naming, and idiom.
+      </div>
+      <p>
+        <strong>Key Architectural Takeaway:</strong> Rather than dumping 50 edge-case rules into the boot prompt, Claude Code injects <code>&lt;system-reminder&gt;</code> blocks on specific turns (e.g., when Plan mode is activated or a test failure occurs).
+      </p>
+
+      <h3>2. OpenAI Codex CLI: The AGENTS.md Hierarchy</h3>
+      <p>
+        OpenAI Codex's system prompt is remarkably brief (less than 500 words), delegating project-specific behavior entirely to the filesystem:
+      </p>
+      <div class="code-callout">
+You are a coding agent running in the Codex CLI, a terminal-based coding assistant.
+You are expected to be precise, safe, and helpful.
+
+## AGENTS.md Spec:
+- Repositories often contain AGENTS.md files specifying coding conventions, organization patterns, or test execution steps.
+- The scope of an AGENTS.md file covers the directory tree rooted at its folder.
+- You must strictly obey instructions in any AGENTS.md file whose scope includes a file you modify.
+      </div>
+
+      <h3>3. The Exe.dev Fleet Architecture: Ledger & Cross-Family Verification</h3>
+      <p>
+        The Fleet prompt architecture solves an existential problem that neither Claude Code nor Codex addresses: <strong>autonomous multi-agent coordination without human stalling</strong>.
+      </p>
+      <div class="code-callout">
+## Rules that never bend
+1. Beads is the ledger. Every piece of work has a bead. Claim it with bd update &lt;id&gt; --claim.
+2. Never review your own work. A different model family reviews every change.
+3. Verify for real. "It serves" or "tests pass" is not "it works". Drive the actual behaviour in a browser.
+4. Long commands: fleet-gate, then stop. Never poll with sleep loops or repeated status checks.
+      </div>
+    </section>
+
+    <section id="recommendations" class="content-section">
+      <h2>Proposed Architectural Improvements for Fleet Prompts</h2>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <h3>1. Compact <code>roles/common.md</code> by 40%</h3>
+          <p>
+            <strong>Problem:</strong> <code>roles/common.md</code> has grown to 15,580 bytes (~3,800 tokens), close to the 16KB deployment limit. Over 40% of its content describes mechanisms enforced deterministically by daemons (e.g. 6/h wake limits, reaper thresholds, process groups).<br>
+            <strong>Fix:</strong> Strip daemon implementation details from the prompt. Replace verbose explanations with terse, actionable invariants.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>2. Adopt Clickable Terminal Links (<code>file:line</code>)</h3>
+          <p>
+            <strong>Inspiration:</strong> Claude Code's clickability rule.<br>
+            <strong>Fix:</strong> Add an explicit formatting rule: <em>"Always reference code locations as <code>path/to/file.ext:line</code>."</em> When reviewers report findings on beads or terminal logs, operators can click directly into the exact line in VS Code or iTerm.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>3. Hypothesis-First Bounded Turn Rule</h3>
+          <p>
+            <strong>Inspiration:</strong> SWE-agent's <code>DISCUSSION</code> &rarr; <code>COMMAND</code> pattern.<br>
+            <strong>Fix:</strong> DeepSeek and GLM implementers sometimes execute 8-10 speculative bash tool calls without writing code or committing. Enforce: <em>"State 1 concrete hypothesis &rarr; run focused probe &rarr; commit code &rarr; end turn."</em>
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <h3>4. Dynamic Phase Injection vs Static Bloat</h3>
+          <p>
+            <strong>Inspiration:</strong> Claude Code's <code>&lt;system-reminder&gt;</code>.<br>
+            <strong>Fix:</strong> Instead of having all reviewer and landing rules in every lane's system prompt, have <code>lanes.sh spawn</code> inject role criteria only when that specific phase begins.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Paul Kinlan &middot; <a href="/">All Projects</a> &middot; <a href="https://github.com/PaulKinlan/fleet">Fleet Architecture</a></p>
+  </footer>
+</body>
+</html>
